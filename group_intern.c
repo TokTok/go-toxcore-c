@@ -59,27 +59,11 @@ typedef struct {
     void *log_user_data;
 } Messenger_Options_Fake;
 
-typedef struct {
-    uint32_t nospam;
-    void (*handle_friendrequest)(void *, const uint8_t *, const uint8_t *, size_t, void *);
-    uint8_t handle_friendrequest_isset;
-    void *handle_friendrequest_object;
-
-    int (*filter_function)(const uint8_t *, void *);
-    void *filter_function_userdata;
-    /* NOTE: The following is just a temporary fix for the multiple friend requests received at the same time problem.
-     * TODO(irungentoo): Make this better (This will most likely tie in with the way we will handle spam.)
-     */
-
 
 #define MAX_RECEIVED_STORED 32
 #define CRYPTO_PUBLIC_KEY_SIZE         32
 #define CRYPTO_SHARED_KEY_SIZE         32
 #define CRYPTO_SYMMETRIC_KEY_SIZE      CRYPTO_SHARED_KEY_SIZE
-
-    uint8_t received_requests[MAX_RECEIVED_STORED][CRYPTO_PUBLIC_KEY_SIZE];
-    uint16_t received_requests_index;
-} Friend_Requests_Fake;
 
 typedef struct {
     uint8_t     public_key[CRYPTO_PUBLIC_KEY_SIZE];
@@ -143,7 +127,7 @@ struct Messenger {
     /*Friend_Connections*/void *fr_c;
 
     /*TCP_Server*/void *tcp_server;
-    Friend_Requests_Fake fr;
+    /*Friend_Requests **/void *fr;
     uint8_t name[TOX_MAX_NAME_LENGTH];
     uint16_t name_length;
 
