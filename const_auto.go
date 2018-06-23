@@ -33,6 +33,8 @@ const ERR_NEW_LOAD_ENCRYPTED = int(C.TOX_ERR_NEW_LOAD_ENCRYPTED) // 8
 func init(){_ERR_NEWS[ERR_NEW_LOAD_ENCRYPTED] = "TE08: The byte array to be loaded contained an encrypted save."}
 const ERR_NEW_LOAD_BAD_FORMAT = int(C.TOX_ERR_NEW_LOAD_BAD_FORMAT) // 9
 func init(){_ERR_NEWS[ERR_NEW_LOAD_BAD_FORMAT] = "TE09: The data format was invalid. This can happen when loading data that was saved by an older version of Tox, or when the data has been corrupted. When loading from badly formatted data, some data may have been loaded, and the rest is discarded. Passing an invalid length parameter also causes this error."}
+const ERR_NEW_PROXY_WITH_UDP = int(C.TOX_ERR_NEW_PROXY_WITH_UDP) // 10
+func init(){_ERR_NEWS[ERR_NEW_PROXY_WITH_UDP] = "TE10: UDP was enabled together with a proxy. This is a security issue, because UDP connections are never proxied. You must disable UDP in order to use a proxy."}
 
 var _ERR_BOOTSTRAPS = make(map[int]string)
 func init(){_ERR_BOOTSTRAPS[-1] = "TE-1: _ERR_BOOTSTRAP"}
