@@ -3,15 +3,13 @@
 
 ## go-toxcore
 
-The golang bindings for libtoxcore 
-
+The golang bindings for libtoxcore
 
 ### Installation
 
     # fetch libtoxcore if necessary
     # see https://github.com/TokTok/c-toxcore/blob/master/INSTALL.md
     go get github.com/TokTok/go-toxcore-c
-
 
 ### Examples
 
@@ -21,7 +19,7 @@ The golang bindings for libtoxcore
     opt := tox.NewToxOptions()
     t := tox.NewTox(opt)
     av := tox.NewToxAv(t)
-    
+
     // use default options
     t := tox.NewTox(nil)
     av := tox.NewToxAv(t)
@@ -29,13 +27,11 @@ The golang bindings for libtoxcore
 ### Tests
 
     go test -v -covermode count
-    
 
-Contributing
-------------
+## Contributing
 
-1. Fork it
-2. Create your feature branch (``git checkout -b my-new-feature``)
-3. Commit your changes (``git commit -am 'Add some feature'``)
-4. Push to the branch (``git push origin my-new-feature``)
-5. Create new Pull Request
+1.  Fork it
+2.  Create your feature branch (`git checkout -b my-new-feature`)
+3.  Commit your changes (`git commit -am 'Add some feature'`)
+4.  Push to the branch (`git push origin my-new-feature`)
+5.  Create new Pull Request
