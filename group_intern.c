@@ -38,7 +38,7 @@ typedef struct {
 
 typedef struct {
     IP_Port ip_port;
-    uint8_t proxy_type; // a value from TCP_PROXY_TYPE
+    uint8_t proxy_type;  // a value from TCP_PROXY_TYPE
 } TCP_Proxy_Info;
 
 typedef struct {
@@ -55,9 +55,9 @@ typedef struct {
     void *log_user_data;
 } Messenger_Options_Fake;
 
-#define MAX_RECEIVED_STORED 32
-#define CRYPTO_PUBLIC_KEY_SIZE 32
-#define CRYPTO_SHARED_KEY_SIZE 32
+#define MAX_RECEIVED_STORED       32
+#define CRYPTO_PUBLIC_KEY_SIZE    32
+#define CRYPTO_SHARED_KEY_SIZE    32
 #define CRYPTO_SYMMETRIC_KEY_SIZE CRYPTO_SHARED_KEY_SIZE
 
 typedef struct {
@@ -66,11 +66,10 @@ typedef struct {
 } Node_format_Fake;
 
 #define DESIRED_CLOSE_CONNECTIONS 4
-#define MAX_GROUP_CONNECTIONS 16
-#define GROUP_IDENTIFIER_LENGTH                                                \
-  (1 +                                                                         \
-   CRYPTO_SYMMETRIC_KEY_SIZE) /* type + CRYPTO_SYMMETRIC_KEY_SIZE so we can    \
-                                 use new_symmetric_key(...) to fill it */
+#define MAX_GROUP_CONNECTIONS     16
+#define GROUP_IDENTIFIER_LENGTH                                                   \
+    (1 + CRYPTO_SYMMETRIC_KEY_SIZE) /* type + CRYPTO_SYMMETRIC_KEY_SIZE so we can \
+                                       use new_symmetric_key(...) to fill it */
 
 typedef struct {
     uint8_t status;
@@ -114,14 +113,9 @@ typedef struct {
     void (*group_on_delete)(void *, uint32_t);
 } Group_c_Fake;
 
-typedef enum {
-    USERSTATUS_NONE,
-    USERSTATUS_AWAY,
-    USERSTATUS_BUSY,
-    USERSTATUS_INVALID
-} USERSTATUS;
+typedef enum { USERSTATUS_NONE, USERSTATUS_AWAY, USERSTATUS_BUSY, USERSTATUS_INVALID } USERSTATUS;
 
-#define NUM_SAVED_TCP_RELAYS 8
+#define NUM_SAVED_TCP_RELAYS     8
 #define MAX_STATUSMESSAGE_LENGTH 1007
 
 struct Messenger {
@@ -153,50 +147,38 @@ struct Messenger {
 
     time_t lastdump;
 
-    uint8_t
-    has_added_relays; // If the first connection has occurred in do_messenger
-    Node_format_Fake
-    loaded_relays[NUM_SAVED_TCP_RELAYS]; // Relays loaded from config
+    uint8_t has_added_relays;  // If the first connection has occurred in do_messenger
+    Node_format_Fake loaded_relays[NUM_SAVED_TCP_RELAYS];  // Relays loaded from config
 
-    void (*friend_request)(struct Messenger *m, uint32_t, unsigned int,
-                           const uint8_t *, size_t, void *);
-    void (*friend_message)(struct Messenger *m, uint32_t, unsigned int,
-                           const uint8_t *, size_t, void *);
-    void (*friend_namechange)(struct Messenger *m, uint32_t, const uint8_t *,
-                              size_t, void *);
-    void (*friend_statusmessagechange)(struct Messenger *m, uint32_t,
-                                       const uint8_t *, size_t, void *);
-    void (*friend_userstatuschange)(struct Messenger *m, uint32_t, unsigned int,
-                                    void *);
+    void (*friend_request)(
+        struct Messenger *m, uint32_t, unsigned int, const uint8_t *, size_t, void *);
+    void (*friend_message)(
+        struct Messenger *m, uint32_t, unsigned int, const uint8_t *, size_t, void *);
+    void (*friend_namechange)(struct Messenger *m, uint32_t, const uint8_t *, size_t, void *);
+    void (*friend_statusmessagechange)(
+        struct Messenger *m, uint32_t, const uint8_t *, size_t, void *);
+    void (*friend_userstatuschange)(struct Messenger *m, uint32_t, unsigned int, void *);
     void (*friend_typingchange)(struct Messenger *m, uint32_t, bool, void *);
     void (*read_receipt)(struct Messenger *m, uint32_t, uint32_t, void *);
-    void (*friend_connectionstatuschange)(struct Messenger *m, uint32_t,
-                                          unsigned int, void *);
-    void (*friend_connectionstatuschange_internal)(struct Messenger *m, uint32_t,
-            uint8_t, void *);
+    void (*friend_connectionstatuschange)(struct Messenger *m, uint32_t, unsigned int, void *);
+    void (*friend_connectionstatuschange_internal)(struct Messenger *m, uint32_t, uint8_t, void *);
     void *friend_connectionstatuschange_internal_userdata;
 
     void *conferences_object; /* Set by new_groupchats()*/
-    void (*conference_invite)(struct Messenger *m, uint32_t, const uint8_t *,
-                              uint16_t, void *);
+    void (*conference_invite)(struct Messenger *m, uint32_t, const uint8_t *, uint16_t, void *);
 
-    void (*file_sendrequest)(struct Messenger *m, uint32_t, uint32_t, uint32_t,
-                             uint64_t, const uint8_t *, size_t, void *);
-    void (*file_filecontrol)(struct Messenger *m, uint32_t, uint32_t,
-                             unsigned int, void *);
-    void (*file_filedata)(struct Messenger *m, uint32_t, uint32_t, uint64_t,
-                          const uint8_t *, size_t, void *);
-    void (*file_reqchunk)(struct Messenger *m, uint32_t, uint32_t, uint64_t,
-                          size_t, void *);
+    void (*file_sendrequest)(struct Messenger *m, uint32_t, uint32_t, uint32_t, uint64_t,
+        const uint8_t *, size_t, void *);
+    void (*file_filecontrol)(struct Messenger *m, uint32_t, uint32_t, unsigned int, void *);
+    void (*file_filedata)(
+        struct Messenger *m, uint32_t, uint32_t, uint64_t, const uint8_t *, size_t, void *);
+    void (*file_reqchunk)(struct Messenger *m, uint32_t, uint32_t, uint64_t, size_t, void *);
 
-    void (*msi_packet)(struct Messenger *m, uint32_t, const uint8_t *, uint16_t,
-                       void *);
+    void (*msi_packet)(struct Messenger *m, uint32_t, const uint8_t *, uint16_t, void *);
     void *msi_packet_userdata;
 
-    void (*lossy_packethandler)(struct Messenger *m, uint32_t, const uint8_t *,
-                                size_t, void *);
-    void (*lossless_packethandler)(struct Messenger *m, uint32_t, const uint8_t *,
-                                   size_t, void *);
+    void (*lossy_packethandler)(struct Messenger *m, uint32_t, const uint8_t *, size_t, void *);
+    void (*lossless_packethandler)(struct Messenger *m, uint32_t, const uint8_t *, size_t, void *);
 
     void (*core_connection_change)(struct Messenger *m, unsigned int, void *);
     unsigned int last_connection_status;
@@ -212,19 +194,15 @@ typedef struct {
     uint32_t num_chats;
 } Group_Chats;
 
-extern void *group_get_object(/*const Group_Chats*/ void *g_c,
-        uint32_t groupnumber);
+extern void *group_get_object(/*const Group_Chats*/ void *g_c, uint32_t groupnumber);
 
-enum {
-    GROUPCHAT_STATUS_NONE,
-    GROUPCHAT_STATUS_VALID,
-    GROUPCHAT_STATUS_CONNECTED
-};
+enum { GROUPCHAT_STATUS_NONE, GROUPCHAT_STATUS_VALID, GROUPCHAT_STATUS_CONNECTED };
 
 /* return 1 if the groupnumber is not valid.
  * return 0 if the groupnumber is valid.
  */
-static uint8_t groupnumber_not_valid(const Group_Chats *g_c, int groupnumber) {
+static uint8_t groupnumber_not_valid(const Group_Chats *g_c, int groupnumber)
+{
     if ((unsigned int)groupnumber >= g_c->num_chats) {
         return 1;
     }
@@ -241,13 +219,13 @@ static uint8_t groupnumber_not_valid(const Group_Chats *g_c, int groupnumber) {
 }
 
 // padding cause offset not really size, can not use offset adder
-static Group_c_Fake *get_group_c(Tox *tox, int groupnumber) {
+static Group_c_Fake *get_group_c(Tox *tox, int groupnumber)
+{
     int fos = offsetof(struct Messenger, conferences_object);
     // int fos2 = offsetof(Group_c_Fake, identifier);
     int conferences_object_offset = fos;
 
-    char **p = (char **)(&((char *)*(struct Messenger **)tox)[0] +
-                         conferences_object_offset);
+    char **p = (char **)(&((char *)*(struct Messenger **)tox)[0] + conferences_object_offset);
     // void *p2 = ((struct Messenger*)tox)->conferences_object;
     Group_Chats *grpchats = (Group_Chats *)(*p);
     if (groupnumber_not_valid(grpchats, groupnumber)) {
@@ -257,15 +235,15 @@ static Group_c_Fake *get_group_c(Tox *tox, int groupnumber) {
     return g;
 }
 
-void tox_conference_get_identifier(Tox *tox, uint32_t conference_number,
-                                   void *idbuf) {
+void tox_conference_get_identifier(Tox *tox, uint32_t conference_number, void *idbuf)
+{
     Group_c_Fake *g = get_group_c(tox, conference_number);
     if (g) {
         memcpy(idbuf, g->identifier, GROUP_IDENTIFIER_LENGTH);
     }
 }
-void tox_conference_get_pubkey(Tox *tox, uint32_t conference_number,
-                               void *pkbuf) {
+void tox_conference_get_pubkey(Tox *tox, uint32_t conference_number, void *pkbuf)
+{
     Group_c_Fake *g = get_group_c(tox, conference_number);
     if (g) {
         memcpy(pkbuf, g->real_pk, CRYPTO_PUBLIC_KEY_SIZE);
