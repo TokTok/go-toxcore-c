@@ -69,12 +69,12 @@ func NewToxOptions() *ToxOptions {
 
 func (this *ToxOptions) toCToxOptions() *C.struct_Tox_Options {
 	toxopts := C.tox_options_new(nil)
-	C.tox_options_default(toxopts)
+	C.tox_options_set_experimental_owned_data(toxopts, true)
 	C.tox_options_set_ipv6_enabled(toxopts, (C._Bool)(this.Ipv6_enabled))
 	C.tox_options_set_udp_enabled(toxopts, (C._Bool)(this.Udp_enabled))
 
 	if this.Savedata_data != nil {
-		C.tox_options_set_savedata_data(toxopts, (*C.uint8_t)(&this.Savedata_data[0]), C.size_t(len(this.Savedata_data)))
+		C.tox_options_set_savedata(toxopts, (*C.uint8_t)(&this.Savedata_data[0]), C.size_t(len(this.Savedata_data)))
 		C.tox_options_set_savedata_type(toxopts, C.Tox_Savedata_Type(this.Savedata_type))
 	}
 	C.tox_options_set_tcp_port(toxopts, (C.uint16_t)(this.Tcp_port))
