@@ -13,6 +13,7 @@ void callbackConferenceMessageWrapperForC(Tox *, uint32_t, uint32_t, Tox_Message
 void callbackConferenceTitleWrapperForC(Tox*, uint32_t, uint32_t, gcuint8_t*, size_t, void*);
 void callbackConferencePeerNameWrapperForC(Tox*, uint32_t, uint32_t, gcuint8_t*, size_t, void*);
 void callbackConferencePeerListChangedWrapperForC(Tox*, uint32_t, void*);
+void callbackConferenceConnectedWrapperForC(Tox*, uint32_t, void*);
 
 // fix nouse compile warning
 static inline __attribute__((__unused__)) void fixnousetoxgroup(void) {
@@ -36,6 +37,7 @@ type cb_conference_action_ftype func(this *Tox, groupNumber uint32, peerNumber u
 type cb_conference_title_ftype func(this *Tox, groupNumber uint32, peerNumber uint32, title string, userData interface{})
 type cb_conference_peer_name_ftype func(this *Tox, groupNumber uint32, peerNumber uint32, name string, userData interface{})
 type cb_conference_peer_list_changed_ftype func(this *Tox, groupNumber uint32, userData interface{})
+type cb_conference_connected_ftype func(this *Tox, groupNumber uint32, userData interface{})
 
 // tox_callback_conference_***
 
@@ -466,6 +468,29 @@ func (this *Tox) ConferenceGetIdentifier(groupNumber uint32) (string, error) {
 	C.tox_conference_get_id(this.toxcore, C.uint32_t(groupNumber), (*C.uint8_t)(&idbuf[0]))
 	identifier := strings.ToUpper(hex.EncodeToString(idbuf[:]))
 	identifier = identifier[2:] // 1B(type)+32B(identifier)
-
+	
 	return identifier, nil
+}
+
+//export callbackConferenceConnectedWrapperForC
+func callbackConferenceConnectedWrapperForC(m *C.Tox, a0 C.uint32_t, a1 unsafe.Pointer) {
+	var this = cbUserDatas.get(m)
+	for cbfni, ud := range this.cb_conference_connecteds {
+		cbfn := *(*cb_conference_connected_ftype)(cbfni)
+		this.putcbevts(func() { cbfn(this, uint32(a0), ud) })
+	}
+}
+
+func (this *Tox) CallbackConferenceConnected(cbfn cb_conference_connected_ftype, userData interface{}) {
+	this.CallbackConferenceConnectedAdd(cbfn, userData)
+}
+
+func (this *Tox) CallbackConferenceConnectedAdd(cbfn cb_conference_connected_ftype, userData interface{}) {
+	cbfnp := (unsafe.Pointer)(&cbfn)
+	if _, ok := this.cb_conference_connecteds[cbfnp]; ok {
+		return
+	}
+	this.cb_conference_connecteds[cbfnp] = userData
+	
+	C.tox_callback_conference_connected(this.toxcore, (*C.tox_conference_connected_cb)(C.callbackConferenceConnectedWrapperForC))
 }

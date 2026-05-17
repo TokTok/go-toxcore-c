@@ -46,6 +46,7 @@ type ToxOptions struct {
 	End_port                uint16
 	Hole_punching_enabled   bool
 	ThreadSafe              bool
+	GroupsPersistence       bool
 	LogCallback             func(_ *Tox, level int, file string, line uint32, fname string, msg string)
 }
 
@@ -63,6 +64,8 @@ func NewToxOptions() *ToxOptions {
 	opts.Start_port = uint16(C.tox_options_get_start_port(toxopts))
 	opts.End_port = uint16(C.tox_options_get_end_port(toxopts))
 	opts.Hole_punching_enabled = bool(C.tox_options_get_hole_punching_enabled(toxopts))
+	opts.ThreadSafe = bool(C.tox_options_get_experimental_thread_safety(toxopts))
+	opts.GroupsPersistence = bool(C.tox_options_get_experimental_groups_persistence(toxopts))
 
 	return opts
 }
@@ -91,6 +94,9 @@ func (this *ToxOptions) toCToxOptions() *C.struct_Tox_Options {
 	C.tox_options_set_hole_punching_enabled(toxopts, C._Bool(this.Hole_punching_enabled))
 
 	C.tox_options_set_log_callback(toxopts, (*C.tox_log_cb)((unsafe.Pointer)(C.toxCallbackLog)))
+
+	C.tox_options_set_experimental_thread_safety(toxopts, C._Bool(this.ThreadSafe))
+	C.tox_options_set_experimental_groups_persistence(toxopts, C._Bool(this.GroupsPersistence))
 
 	return toxopts
 }

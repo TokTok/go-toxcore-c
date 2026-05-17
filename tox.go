@@ -101,6 +101,27 @@ type Tox struct {
 	cb_conference_titles             map[unsafe.Pointer]interface{}
 	cb_conference_peer_names         map[unsafe.Pointer]interface{}
 	cb_conference_peer_list_changeds map[unsafe.Pointer]interface{}
+	cb_conference_connecteds        map[unsafe.Pointer]interface{}
+
+	// Group Chat callbacks
+	cb_group_peer_names         map[unsafe.Pointer]interface{}
+	cb_group_peer_statuses      map[unsafe.Pointer]interface{}
+	cb_group_topics             map[unsafe.Pointer]interface{}
+	cb_group_privacy_states     map[unsafe.Pointer]interface{}
+	cb_group_voice_states       map[unsafe.Pointer]interface{}
+	cb_group_topic_locks        map[unsafe.Pointer]interface{}
+	cb_group_peer_limits        map[unsafe.Pointer]interface{}
+	cb_group_passwords          map[unsafe.Pointer]interface{}
+	cb_group_messages           map[unsafe.Pointer]interface{}
+	cb_group_private_messages   map[unsafe.Pointer]interface{}
+	cb_group_custom_packets     map[unsafe.Pointer]interface{}
+	cb_group_custom_private_packets map[unsafe.Pointer]interface{}
+	cb_group_invites            map[unsafe.Pointer]interface{}
+	cb_group_peer_joins         map[unsafe.Pointer]interface{}
+	cb_group_peer_exits         map[unsafe.Pointer]interface{}
+	cb_group_self_joins         map[unsafe.Pointer]interface{}
+	cb_group_join_fails         map[unsafe.Pointer]interface{}
+	cb_group_moderations        map[unsafe.Pointer]interface{}
 
 	cb_file_recv_controls  map[unsafe.Pointer]interface{}
 	cb_file_recvs          map[unsafe.Pointer]interface{}
@@ -506,6 +527,27 @@ func NewTox(opt *ToxOptions) *Tox {
 	tox.cb_conference_titles = make(map[unsafe.Pointer]interface{})
 	tox.cb_conference_peer_names = make(map[unsafe.Pointer]interface{})
 	tox.cb_conference_peer_list_changeds = make(map[unsafe.Pointer]interface{})
+	tox.cb_conference_connecteds = make(map[unsafe.Pointer]interface{})
+
+	// Group Chat callbacks
+	tox.cb_group_peer_names = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_peer_statuses = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_topics = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_privacy_states = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_voice_states = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_topic_locks = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_peer_limits = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_passwords = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_messages = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_private_messages = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_custom_packets = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_custom_private_packets = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_invites = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_peer_joins = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_peer_exits = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_self_joins = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_join_fails = make(map[unsafe.Pointer]interface{})
+	tox.cb_group_moderations = make(map[unsafe.Pointer]interface{})
 
 	tox.cb_file_recv_controls = make(map[unsafe.Pointer]interface{})
 	tox.cb_file_recvs = make(map[unsafe.Pointer]interface{})

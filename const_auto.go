@@ -348,3 +348,331 @@ const ERR_GET_PORT_OK = int(C.TOX_ERR_GET_PORT_OK) // 0
 func init(){_ERR_GET_PORTS[ERR_GET_PORT_OK] = "TE00: The function returned successfully."}
 const ERR_GET_PORT_NOT_BOUND = int(C.TOX_ERR_GET_PORT_NOT_BOUND) // 1
 func init(){_ERR_GET_PORTS[ERR_GET_PORT_NOT_BOUND] = "TE01: The instance was not bound to any port."}
+
+// Group Chat 错误码
+var _ERR_GROUP_NEWS = make(map[int]string)
+func init(){_ERR_GROUP_NEWS[-1] = "TE-1: _ERR_GROUP_NEW"}
+const ERR_GROUP_NEW_OK = int(C.TOX_ERR_GROUP_NEW_OK) // 0
+func init(){_ERR_GROUP_NEWS[ERR_GROUP_NEW_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_NEW_TOO_LONG = int(C.TOX_ERR_GROUP_NEW_TOO_LONG) // 1
+func init(){_ERR_GROUP_NEWS[ERR_GROUP_NEW_TOO_LONG] = "TE01: The group name exceeded the maximum allowed length."}
+const ERR_GROUP_NEW_EMPTY = int(C.TOX_ERR_GROUP_NEW_EMPTY) // 2
+func init(){_ERR_GROUP_NEWS[ERR_GROUP_NEW_EMPTY] = "TE02: The group name was empty."}
+const ERR_GROUP_NEW_INIT = int(C.TOX_ERR_GROUP_NEW_INIT) // 3
+func init(){_ERR_GROUP_NEWS[ERR_GROUP_NEW_INIT] = "TE03: The group instance failed to initialize."}
+const ERR_GROUP_NEW_STATE = int(C.TOX_ERR_GROUP_NEW_STATE) // 4
+func init(){_ERR_GROUP_NEWS[ERR_GROUP_NEW_STATE] = "TE04: The group state failed to initialize."}
+const ERR_GROUP_NEW_ANNOUNCE = int(C.TOX_ERR_GROUP_NEW_ANNOUNCE) // 5
+func init(){_ERR_GROUP_NEWS[ERR_GROUP_NEW_ANNOUNCE] = "TE05: The group announce failed to initialize."}
+
+var _ERR_GROUP_JOINS = make(map[int]string)
+func init(){_ERR_GROUP_JOINS[-1] = "TE-1: _ERR_GROUP_JOIN"}
+const ERR_GROUP_JOIN_OK = int(C.TOX_ERR_GROUP_JOIN_OK) // 0
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_JOIN_INIT = int(C.TOX_ERR_GROUP_JOIN_INIT) // 1
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_INIT] = "TE01: The group instance failed to initialize."}
+const ERR_GROUP_JOIN_BAD_CHAT_ID = int(C.TOX_ERR_GROUP_JOIN_BAD_CHAT_ID) // 2
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_BAD_CHAT_ID] = "TE02: The chat ID passed was invalid."}
+const ERR_GROUP_JOIN_EMPTY = int(C.TOX_ERR_GROUP_JOIN_EMPTY) // 3
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_EMPTY] = "TE03: The chat ID was empty."}
+const ERR_GROUP_JOIN_TOO_LONG = int(C.TOX_ERR_GROUP_JOIN_TOO_LONG) // 4
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_TOO_LONG] = "TE04: The password exceeded the maximum allowed length."}
+const ERR_GROUP_JOIN_PASSWORD = int(C.TOX_ERR_GROUP_JOIN_PASSWORD) // 5
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_PASSWORD] = "TE05: The password did not match the group password."}
+const ERR_GROUP_JOIN_CORE = int(C.TOX_ERR_GROUP_JOIN_CORE) // 6
+func init(){_ERR_GROUP_JOINS[ERR_GROUP_JOIN_CORE] = "TE06: A core error occurred."}
+
+var _ERR_GROUP_IS_CONNECTEDS = make(map[int]string)
+func init(){_ERR_GROUP_IS_CONNECTEDS[-1] = "TE-1: _ERR_GROUP_IS_CONNECTED"}
+const ERR_GROUP_IS_CONNECTED_OK = int(C.TOX_ERR_GROUP_IS_CONNECTED_OK) // 0
+func init(){_ERR_GROUP_IS_CONNECTEDS[ERR_GROUP_IS_CONNECTED_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_IS_CONNECTED_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_IS_CONNECTED_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_IS_CONNECTEDS[ERR_GROUP_IS_CONNECTED_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+
+var _ERR_GROUP_DISCONNECTS = make(map[int]string)
+func init(){_ERR_GROUP_DISCONNECTS[-1] = "TE-1: _ERR_GROUP_DISCONNECT"}
+const ERR_GROUP_DISCONNECT_OK = int(C.TOX_ERR_GROUP_DISCONNECT_OK) // 0
+func init(){_ERR_GROUP_DISCONNECTS[ERR_GROUP_DISCONNECT_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_DISCONNECT_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_DISCONNECT_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_DISCONNECTS[ERR_GROUP_DISCONNECT_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_DISCONNECT_ALREADY_DISCONNECTED = int(C.TOX_ERR_GROUP_DISCONNECT_ALREADY_DISCONNECTED) // 2
+func init(){_ERR_GROUP_DISCONNECTS[ERR_GROUP_DISCONNECT_ALREADY_DISCONNECTED] = "TE02: The client is already disconnected from the group."}
+
+var _ERR_GROUP_RECONNECTS = make(map[int]string)
+func init(){_ERR_GROUP_RECONNECTS[-1] = "TE-1: _ERR_GROUP_RECONNECT"}
+const ERR_GROUP_RECONNECT_OK = int(C.TOX_ERR_GROUP_RECONNECT_OK) // 0
+func init(){_ERR_GROUP_RECONNECTS[ERR_GROUP_RECONNECT_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_RECONNECT_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_RECONNECT_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_RECONNECTS[ERR_GROUP_RECONNECT_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_RECONNECT_CORE = int(C.TOX_ERR_GROUP_RECONNECT_CORE) // 2
+func init(){_ERR_GROUP_RECONNECTS[ERR_GROUP_RECONNECT_CORE] = "TE02: A core error occurred."}
+
+var _ERR_GROUP_LEAVES = make(map[int]string)
+func init(){_ERR_GROUP_LEAVES[-1] = "TE-1: _ERR_GROUP_LEAVE"}
+const ERR_GROUP_LEAVE_OK = int(C.TOX_ERR_GROUP_LEAVE_OK) // 0
+func init(){_ERR_GROUP_LEAVES[ERR_GROUP_LEAVE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_LEAVE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_LEAVE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_LEAVES[ERR_GROUP_LEAVE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_LEAVE_TOO_LONG = int(C.TOX_ERR_GROUP_LEAVE_TOO_LONG) // 2
+func init(){_ERR_GROUP_LEAVES[ERR_GROUP_LEAVE_TOO_LONG] = "TE02: The parting message exceeded the maximum allowed length."}
+const ERR_GROUP_LEAVE_FAIL_SEND = int(C.TOX_ERR_GROUP_LEAVE_FAIL_SEND) // 3
+func init(){_ERR_GROUP_LEAVES[ERR_GROUP_LEAVE_FAIL_SEND] = "TE03: The parting packet failed to send."}
+
+var _ERR_GROUP_SELF_QUERYS = make(map[int]string)
+func init(){_ERR_GROUP_SELF_QUERYS[-1] = "TE-1: _ERR_GROUP_SELF_QUERY"}
+const ERR_GROUP_SELF_QUERY_OK = int(C.TOX_ERR_GROUP_SELF_QUERY_OK) // 0
+func init(){_ERR_GROUP_SELF_QUERYS[ERR_GROUP_SELF_QUERY_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SELF_QUERY_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SELF_QUERY_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SELF_QUERYS[ERR_GROUP_SELF_QUERY_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+
+var _ERR_GROUP_SELF_NAME_SETS = make(map[int]string)
+func init(){_ERR_GROUP_SELF_NAME_SETS[-1] = "TE-1: _ERR_GROUP_SELF_NAME_SET"}
+const ERR_GROUP_SELF_NAME_SET_OK = int(C.TOX_ERR_GROUP_SELF_NAME_SET_OK) // 0
+func init(){_ERR_GROUP_SELF_NAME_SETS[ERR_GROUP_SELF_NAME_SET_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SELF_NAME_SET_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SELF_NAME_SET_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SELF_NAME_SETS[ERR_GROUP_SELF_NAME_SET_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SELF_NAME_SET_TOO_LONG = int(C.TOX_ERR_GROUP_SELF_NAME_SET_TOO_LONG) // 2
+func init(){_ERR_GROUP_SELF_NAME_SETS[ERR_GROUP_SELF_NAME_SET_TOO_LONG] = "TE02: The name exceeded the maximum allowed length."}
+const ERR_GROUP_SELF_NAME_SET_INVALID = int(C.TOX_ERR_GROUP_SELF_NAME_SET_INVALID) // 3
+func init(){_ERR_GROUP_SELF_NAME_SETS[ERR_GROUP_SELF_NAME_SET_INVALID] = "TE03: The name was empty."}
+const ERR_GROUP_SELF_NAME_SET_FAIL_SEND = int(C.TOX_ERR_GROUP_SELF_NAME_SET_FAIL_SEND) // 4
+func init(){_ERR_GROUP_SELF_NAME_SETS[ERR_GROUP_SELF_NAME_SET_FAIL_SEND] = "TE04: The name packet failed to send."}
+
+var _ERR_GROUP_SELF_STATUS_SETS = make(map[int]string)
+func init(){_ERR_GROUP_SELF_STATUS_SETS[-1] = "TE-1: _ERR_GROUP_SELF_STATUS_SET"}
+const ERR_GROUP_SELF_STATUS_SET_OK = int(C.TOX_ERR_GROUP_SELF_STATUS_SET_OK) // 0
+func init(){_ERR_GROUP_SELF_STATUS_SETS[ERR_GROUP_SELF_STATUS_SET_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SELF_STATUS_SET_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SELF_STATUS_SET_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SELF_STATUS_SETS[ERR_GROUP_SELF_STATUS_SET_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SELF_STATUS_SET_FAIL_SEND = int(C.TOX_ERR_GROUP_SELF_STATUS_SET_FAIL_SEND) // 2
+func init(){_ERR_GROUP_SELF_STATUS_SETS[ERR_GROUP_SELF_STATUS_SET_FAIL_SEND] = "TE02: The status packet failed to send."}
+
+var _ERR_GROUP_PEER_QUERYS = make(map[int]string)
+func init(){_ERR_GROUP_PEER_QUERYS[-1] = "TE-1: _ERR_GROUP_PEER_QUERY"}
+const ERR_GROUP_PEER_QUERY_OK = int(C.TOX_ERR_GROUP_PEER_QUERY_OK) // 0
+func init(){_ERR_GROUP_PEER_QUERYS[ERR_GROUP_PEER_QUERY_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_PEER_QUERY_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_PEER_QUERY_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_PEER_QUERYS[ERR_GROUP_PEER_QUERY_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_PEER_QUERY_PEER_NOT_FOUND = int(C.TOX_ERR_GROUP_PEER_QUERY_PEER_NOT_FOUND) // 2
+func init(){_ERR_GROUP_PEER_QUERYS[ERR_GROUP_PEER_QUERY_PEER_NOT_FOUND] = "TE02: The peer number passed did not designate a valid peer."}
+
+var _ERR_GROUP_STATE_QUERYS = make(map[int]string)
+func init(){_ERR_GROUP_STATE_QUERYS[-1] = "TE-1: _ERR_GROUP_STATE_QUERY"}
+const ERR_GROUP_STATE_QUERY_OK = int(C.TOX_ERR_GROUP_STATE_QUERY_OK) // 0
+func init(){_ERR_GROUP_STATE_QUERYS[ERR_GROUP_STATE_QUERY_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_STATE_QUERY_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_STATE_QUERY_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_STATE_QUERYS[ERR_GROUP_STATE_QUERY_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+
+var _ERR_GROUP_TOPIC_SETS = make(map[int]string)
+func init(){_ERR_GROUP_TOPIC_SETS[-1] = "TE-1: _ERR_GROUP_TOPIC_SET"}
+const ERR_GROUP_TOPIC_SET_OK = int(C.TOX_ERR_GROUP_TOPIC_SET_OK) // 0
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_TOPIC_SET_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_TOPIC_SET_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_TOPIC_SET_TOO_LONG = int(C.TOX_ERR_GROUP_TOPIC_SET_TOO_LONG) // 2
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_TOO_LONG] = "TE02: The topic exceeded the maximum allowed length."}
+const ERR_GROUP_TOPIC_SET_PERMISSIONS = int(C.TOX_ERR_GROUP_TOPIC_SET_PERMISSIONS) // 3
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_PERMISSIONS] = "TE03: The client does not have permissions to set the topic."}
+const ERR_GROUP_TOPIC_SET_FAIL_CREATE = int(C.TOX_ERR_GROUP_TOPIC_SET_FAIL_CREATE) // 4
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_FAIL_CREATE] = "TE04: The topic packet failed to create."}
+const ERR_GROUP_TOPIC_SET_FAIL_SEND = int(C.TOX_ERR_GROUP_TOPIC_SET_FAIL_SEND) // 5
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_FAIL_SEND] = "TE05: The topic packet failed to send."}
+const ERR_GROUP_TOPIC_SET_DISCONNECTED = int(C.TOX_ERR_GROUP_TOPIC_SET_DISCONNECTED) // 6
+func init(){_ERR_GROUP_TOPIC_SETS[ERR_GROUP_TOPIC_SET_DISCONNECTED] = "TE06: The client is disconnected from the group."}
+
+var _ERR_GROUP_BY_IDS = make(map[int]string)
+func init(){_ERR_GROUP_BY_IDS[-1] = "TE-1: _ERR_GROUP_BY_ID"}
+const ERR_GROUP_BY_ID_OK = int(C.TOX_ERR_GROUP_BY_ID_OK) // 0
+func init(){_ERR_GROUP_BY_IDS[ERR_GROUP_BY_ID_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_BY_ID_NULL = int(C.TOX_ERR_GROUP_BY_ID_NULL) // 1
+func init(){_ERR_GROUP_BY_IDS[ERR_GROUP_BY_ID_NULL] = "TE01: One of the arguments to the function was NULL when it was not expected."}
+const ERR_GROUP_BY_ID_NOT_FOUND = int(C.TOX_ERR_GROUP_BY_ID_NOT_FOUND) // 2
+func init(){_ERR_GROUP_BY_IDS[ERR_GROUP_BY_ID_NOT_FOUND] = "TE02: No group with the given chat ID exists on the group list."}
+
+var _ERR_GROUP_SEND_MESSAGES = make(map[int]string)
+func init(){_ERR_GROUP_SEND_MESSAGES[-1] = "TE-1: _ERR_GROUP_SEND_MESSAGE"}
+const ERR_GROUP_SEND_MESSAGE_OK = int(C.TOX_ERR_GROUP_SEND_MESSAGE_OK) // 0
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SEND_MESSAGE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SEND_MESSAGE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SEND_MESSAGE_TOO_LONG = int(C.TOX_ERR_GROUP_SEND_MESSAGE_TOO_LONG) // 2
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_TOO_LONG] = "TE02: The message exceeded the maximum allowed length."}
+const ERR_GROUP_SEND_MESSAGE_EMPTY = int(C.TOX_ERR_GROUP_SEND_MESSAGE_EMPTY) // 3
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_EMPTY] = "TE03: The message was empty."}
+const ERR_GROUP_SEND_MESSAGE_BAD_TYPE = int(C.TOX_ERR_GROUP_SEND_MESSAGE_BAD_TYPE) // 4
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_BAD_TYPE] = "TE04: The message type was invalid."}
+const ERR_GROUP_SEND_MESSAGE_PERMISSIONS = int(C.TOX_ERR_GROUP_SEND_MESSAGE_PERMISSIONS) // 5
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_PERMISSIONS] = "TE05: The client does not have permissions to send messages."}
+const ERR_GROUP_SEND_MESSAGE_FAIL_SEND = int(C.TOX_ERR_GROUP_SEND_MESSAGE_FAIL_SEND) // 6
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_FAIL_SEND] = "TE06: The message packet failed to send."}
+const ERR_GROUP_SEND_MESSAGE_DISCONNECTED = int(C.TOX_ERR_GROUP_SEND_MESSAGE_DISCONNECTED) // 7
+func init(){_ERR_GROUP_SEND_MESSAGES[ERR_GROUP_SEND_MESSAGE_DISCONNECTED] = "TE07: The client is disconnected from the group."}
+
+var _ERR_GROUP_SEND_PRIVATE_MESSAGES = make(map[int]string)
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[-1] = "TE-1: _ERR_GROUP_SEND_PRIVATE_MESSAGE"}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_OK = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_OK) // 0
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_PEER_NOT_FOUND = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_PEER_NOT_FOUND) // 2
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_PEER_NOT_FOUND] = "TE02: The peer number passed did not designate a valid peer."}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_TOO_LONG = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_TOO_LONG) // 3
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_TOO_LONG] = "TE03: The message exceeded the maximum allowed length."}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_EMPTY = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_EMPTY) // 4
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_EMPTY] = "TE04: The message was empty."}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_BAD_TYPE = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_BAD_TYPE) // 5
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_BAD_TYPE] = "TE05: The message type was invalid."}
+const ERR_GROUP_SEND_PRIVATE_MESSAGE_PERMISSIONS = int(C.TOX_ERR_GROUP_SEND_PRIVATE_MESSAGE_PERMISSIONS) // 6
+func init(){_ERR_GROUP_SEND_PRIVATE_MESSAGES[ERR_GROUP_SEND_PRIVATE_MESSAGE_PERMISSIONS] = "TE06: The client does not have permissions to send private messages."}
+
+var _ERR_GROUP_SEND_CUSTOM_PACKETS = make(map[int]string)
+func init(){_ERR_GROUP_SEND_CUSTOM_PACKETS[-1] = "TE-1: _ERR_GROUP_SEND_CUSTOM_PACKET"}
+const ERR_GROUP_SEND_CUSTOM_PACKET_OK = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PACKET_OK) // 0
+func init(){_ERR_GROUP_SEND_CUSTOM_PACKETS[ERR_GROUP_SEND_CUSTOM_PACKET_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SEND_CUSTOM_PACKET_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PACKET_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SEND_CUSTOM_PACKETS[ERR_GROUP_SEND_CUSTOM_PACKET_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SEND_CUSTOM_PACKET_TOO_LONG = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PACKET_TOO_LONG) // 2
+func init(){_ERR_GROUP_SEND_CUSTOM_PACKETS[ERR_GROUP_SEND_CUSTOM_PACKET_TOO_LONG] = "TE02: The packet data exceeded the maximum allowed length."}
+// ERR_GROUP_SEND_CUSTOM_PACKET_PERMISSIONS not in current tox.h
+// const ERR_GROUP_SEND_CUSTOM_PACKET_PERMISSIONS = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PACKET_PERMISSIONS) // 3
+// func init(){_ERR_GROUP_SEND_CUSTOM_PACKETS[ERR_GROUP_SEND_CUSTOM_PACKET_PERMISSIONS] = "TE03: The client does not have permissions to send custom packets."}
+const ERR_GROUP_SEND_CUSTOM_PACKET_FAIL_SEND = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PACKET_FAIL_SEND) // 4
+func init(){_ERR_GROUP_SEND_CUSTOM_PACKETS[ERR_GROUP_SEND_CUSTOM_PACKET_FAIL_SEND] = "TE04: The packet failed to send."}
+
+var _ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS = make(map[int]string)
+func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[-1] = "TE-1: _ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET"}
+const ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_OK = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_OK) // 0
+func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PEER_NOT_FOUND = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PEER_NOT_FOUND) // 2
+func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PEER_NOT_FOUND] = "TE02: The peer number passed did not designate a valid peer."}
+const ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_TOO_LONG = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_TOO_LONG) // 3
+func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_TOO_LONG] = "TE03: The packet data exceeded the maximum allowed length."}
+// ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_INVALID not in current tox.h
+// const ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_INVALID = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_INVALID) // 4
+// func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_INVALID] = "TE04: The first byte of data was not in the specified range."}
+// ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PERMISSIONS not in current tox.h
+// const ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PERMISSIONS = int(C.TOX_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PERMISSIONS) // 5
+// func init(){_ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKETS[ERR_GROUP_SEND_CUSTOM_PRIVATE_PACKET_PERMISSIONS] = "TE05: The client does not have permissions to send custom packets."}
+
+var _ERR_GROUP_INVITE_FRIENDS = make(map[int]string)
+func init(){_ERR_GROUP_INVITE_FRIENDS[-1] = "TE-1: _ERR_GROUP_INVITE_FRIEND"}
+const ERR_GROUP_INVITE_FRIEND_OK = int(C.TOX_ERR_GROUP_INVITE_FRIEND_OK) // 0
+func init(){_ERR_GROUP_INVITE_FRIENDS[ERR_GROUP_INVITE_FRIEND_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_INVITE_FRIEND_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_INVITE_FRIEND_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_INVITE_FRIENDS[ERR_GROUP_INVITE_FRIEND_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_INVITE_FRIEND_FRIEND_NOT_FOUND = int(C.TOX_ERR_GROUP_INVITE_FRIEND_FRIEND_NOT_FOUND) // 2
+func init(){_ERR_GROUP_INVITE_FRIENDS[ERR_GROUP_INVITE_FRIEND_FRIEND_NOT_FOUND] = "TE02: The friend number passed did not designate a valid friend."}
+// ERR_GROUP_INVITE_FRIEND_INVITE_EXISTS not in current tox.h
+// const ERR_GROUP_INVITE_FRIEND_INVITE_EXISTS = int(C.TOX_ERR_GROUP_INVITE_FRIEND_INVITE_EXISTS) // 3
+// func init(){_ERR_GROUP_INVITE_FRIENDS[ERR_GROUP_INVITE_FRIEND_INVITE_EXISTS] = "TE03: The friend has already been invited to the group."}
+const ERR_GROUP_INVITE_FRIEND_FAIL_SEND = int(C.TOX_ERR_GROUP_INVITE_FRIEND_FAIL_SEND) // 4
+func init(){_ERR_GROUP_INVITE_FRIENDS[ERR_GROUP_INVITE_FRIEND_FAIL_SEND] = "TE04: The invite packet failed to send."}
+
+var _ERR_GROUP_INVITE_ACCEPTS = make(map[int]string)
+func init(){_ERR_GROUP_INVITE_ACCEPTS[-1] = "TE-1: _ERR_GROUP_INVITE_ACCEPT"}
+const ERR_GROUP_INVITE_ACCEPT_OK = int(C.TOX_ERR_GROUP_INVITE_ACCEPT_OK) // 0
+func init(){_ERR_GROUP_INVITE_ACCEPTS[ERR_GROUP_INVITE_ACCEPT_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_INVITE_ACCEPT_BAD_INVITE = int(C.TOX_ERR_GROUP_INVITE_ACCEPT_BAD_INVITE) // 1
+func init(){_ERR_GROUP_INVITE_ACCEPTS[ERR_GROUP_INVITE_ACCEPT_BAD_INVITE] = "TE01: The invite data was invalid."}
+
+var _ERR_GROUP_SET_PASSWORDS = make(map[int]string)
+func init(){_ERR_GROUP_SET_PASSWORDS[-1] = "TE-1: _ERR_GROUP_SET_PASSWORD"}
+const ERR_GROUP_SET_PASSWORD_OK = int(C.TOX_ERR_GROUP_SET_PASSWORD_OK) // 0
+func init(){_ERR_GROUP_SET_PASSWORDS[ERR_GROUP_SET_PASSWORD_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_PASSWORD_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_PASSWORD_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_PASSWORDS[ERR_GROUP_SET_PASSWORD_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_PASSWORD_TOO_LONG = int(C.TOX_ERR_GROUP_SET_PASSWORD_TOO_LONG) // 2
+func init(){_ERR_GROUP_SET_PASSWORDS[ERR_GROUP_SET_PASSWORD_TOO_LONG] = "TE02: The password exceeded the maximum allowed length."}
+const ERR_GROUP_SET_PASSWORD_PERMISSIONS = int(C.TOX_ERR_GROUP_SET_PASSWORD_PERMISSIONS) // 3
+func init(){_ERR_GROUP_SET_PASSWORDS[ERR_GROUP_SET_PASSWORD_PERMISSIONS] = "TE03: The client does not have permissions to set the password."}
+const ERR_GROUP_SET_PASSWORD_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_PASSWORD_FAIL_SEND) // 4
+func init(){_ERR_GROUP_SET_PASSWORDS[ERR_GROUP_SET_PASSWORD_FAIL_SEND] = "TE04: The password packet failed to send."}
+
+var _ERR_GROUP_SET_TOPIC_LOCKS = make(map[int]string)
+func init(){_ERR_GROUP_SET_TOPIC_LOCKS[-1] = "TE-1: _ERR_GROUP_SET_TOPIC_LOCK"}
+const ERR_GROUP_SET_TOPIC_LOCK_OK = int(C.TOX_ERR_GROUP_SET_TOPIC_LOCK_OK) // 0
+func init(){_ERR_GROUP_SET_TOPIC_LOCKS[ERR_GROUP_SET_TOPIC_LOCK_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_TOPIC_LOCK_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_TOPIC_LOCK_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_TOPIC_LOCKS[ERR_GROUP_SET_TOPIC_LOCK_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_TOPIC_LOCK_PERMISSIONS = int(C.TOX_ERR_GROUP_SET_TOPIC_LOCK_PERMISSIONS) // 2
+func init(){_ERR_GROUP_SET_TOPIC_LOCKS[ERR_GROUP_SET_TOPIC_LOCK_PERMISSIONS] = "TE02: The client does not have permissions to set the topic lock."}
+const ERR_GROUP_SET_TOPIC_LOCK_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_TOPIC_LOCK_FAIL_SEND) // 3
+func init(){_ERR_GROUP_SET_TOPIC_LOCKS[ERR_GROUP_SET_TOPIC_LOCK_FAIL_SEND] = "TE03: The topic lock packet failed to send."}
+
+var _ERR_GROUP_SET_VOICE_STATES = make(map[int]string)
+func init(){_ERR_GROUP_SET_VOICE_STATES[-1] = "TE-1: _ERR_GROUP_SET_VOICE_STATE"}
+const ERR_GROUP_SET_VOICE_STATE_OK = int(C.TOX_ERR_GROUP_SET_VOICE_STATE_OK) // 0
+func init(){_ERR_GROUP_SET_VOICE_STATES[ERR_GROUP_SET_VOICE_STATE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_VOICE_STATE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_VOICE_STATE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_VOICE_STATES[ERR_GROUP_SET_VOICE_STATE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_VOICE_STATE_PERMISSIONS = int(C.TOX_ERR_GROUP_SET_VOICE_STATE_PERMISSIONS) // 2
+func init(){_ERR_GROUP_SET_VOICE_STATES[ERR_GROUP_SET_VOICE_STATE_PERMISSIONS] = "TE02: The client does not have permissions to set the voice state."}
+const ERR_GROUP_SET_VOICE_STATE_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_VOICE_STATE_FAIL_SEND) // 3
+func init(){_ERR_GROUP_SET_VOICE_STATES[ERR_GROUP_SET_VOICE_STATE_FAIL_SEND] = "TE03: The voice state packet failed to send."}
+
+var _ERR_GROUP_SET_PRIVACY_STATES = make(map[int]string)
+func init(){_ERR_GROUP_SET_PRIVACY_STATES[-1] = "TE-1: _ERR_GROUP_SET_PRIVACY_STATE"}
+const ERR_GROUP_SET_PRIVACY_STATE_OK = int(C.TOX_ERR_GROUP_SET_PRIVACY_STATE_OK) // 0
+func init(){_ERR_GROUP_SET_PRIVACY_STATES[ERR_GROUP_SET_PRIVACY_STATE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_PRIVACY_STATE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_PRIVACY_STATE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_PRIVACY_STATES[ERR_GROUP_SET_PRIVACY_STATE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_PRIVACY_STATE_PERMISSIONS = int(C.TOX_ERR_GROUP_SET_PRIVACY_STATE_PERMISSIONS) // 2
+func init(){_ERR_GROUP_SET_PRIVACY_STATES[ERR_GROUP_SET_PRIVACY_STATE_PERMISSIONS] = "TE02: The client does not have permissions to set the privacy state."}
+const ERR_GROUP_SET_PRIVACY_STATE_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_PRIVACY_STATE_FAIL_SEND) // 3
+func init(){_ERR_GROUP_SET_PRIVACY_STATES[ERR_GROUP_SET_PRIVACY_STATE_FAIL_SEND] = "TE03: The privacy state packet failed to send."}
+
+var _ERR_GROUP_SET_PEER_LIMITS = make(map[int]string)
+func init(){_ERR_GROUP_SET_PEER_LIMITS[-1] = "TE-1: _ERR_GROUP_SET_PEER_LIMIT"}
+const ERR_GROUP_SET_PEER_LIMIT_OK = int(C.TOX_ERR_GROUP_SET_PEER_LIMIT_OK) // 0
+func init(){_ERR_GROUP_SET_PEER_LIMITS[ERR_GROUP_SET_PEER_LIMIT_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_PEER_LIMIT_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_PEER_LIMIT_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_PEER_LIMITS[ERR_GROUP_SET_PEER_LIMIT_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_PEER_LIMIT_PERMISSIONS = int(C.TOX_ERR_GROUP_SET_PEER_LIMIT_PERMISSIONS) // 2
+func init(){_ERR_GROUP_SET_PEER_LIMITS[ERR_GROUP_SET_PEER_LIMIT_PERMISSIONS] = "TE02: The client does not have permissions to set the peer limit."}
+const ERR_GROUP_SET_PEER_LIMIT_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_PEER_LIMIT_FAIL_SEND) // 3
+func init(){_ERR_GROUP_SET_PEER_LIMITS[ERR_GROUP_SET_PEER_LIMIT_FAIL_SEND] = "TE03: The peer limit packet failed to send."}
+
+var _ERR_GROUP_SET_IGNORES = make(map[int]string)
+func init(){_ERR_GROUP_SET_IGNORES[-1] = "TE-1: _ERR_GROUP_SET_IGNORE"}
+const ERR_GROUP_SET_IGNORE_OK = int(C.TOX_ERR_GROUP_SET_IGNORE_OK) // 0
+func init(){_ERR_GROUP_SET_IGNORES[ERR_GROUP_SET_IGNORE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_IGNORE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_IGNORE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_IGNORES[ERR_GROUP_SET_IGNORE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_IGNORE_PEER_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_IGNORE_PEER_NOT_FOUND) // 2
+func init(){_ERR_GROUP_SET_IGNORES[ERR_GROUP_SET_IGNORE_PEER_NOT_FOUND] = "TE02: The peer number passed did not designate a valid peer."}
+// ERR_GROUP_SET_IGNORE_FAIL_SEND not in current tox.h
+// const ERR_GROUP_SET_IGNORE_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_IGNORE_FAIL_SEND) // 3
+// func init(){_ERR_GROUP_SET_IGNORES[ERR_GROUP_SET_IGNORE_FAIL_SEND] = "TE03: The ignore packet failed to send."}
+
+var _ERR_GROUP_SET_ROLES = make(map[int]string)
+func init(){_ERR_GROUP_SET_ROLES[-1] = "TE-1: _ERR_GROUP_SET_ROLE"}
+const ERR_GROUP_SET_ROLE_OK = int(C.TOX_ERR_GROUP_SET_ROLE_OK) // 0
+func init(){_ERR_GROUP_SET_ROLES[ERR_GROUP_SET_ROLE_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_SET_ROLE_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_ROLE_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_SET_ROLES[ERR_GROUP_SET_ROLE_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_SET_ROLE_PEER_NOT_FOUND = int(C.TOX_ERR_GROUP_SET_ROLE_PEER_NOT_FOUND) // 2
+func init(){_ERR_GROUP_SET_ROLES[ERR_GROUP_SET_ROLE_PEER_NOT_FOUND] = "TE02: The peer number passed did not designate a valid peer."}
+const ERR_GROUP_SET_ROLE_PERMISSIONS = int(C.TOX_ERR_GROUP_SET_ROLE_PERMISSIONS) // 3
+func init(){_ERR_GROUP_SET_ROLES[ERR_GROUP_SET_ROLE_PERMISSIONS] = "TE03: The client does not have permissions to set the role."}
+// ERR_GROUP_SET_ROLE_FAIL_SEND not in current tox.h
+// const ERR_GROUP_SET_ROLE_FAIL_SEND = int(C.TOX_ERR_GROUP_SET_ROLE_FAIL_SEND) // 4
+// func init(){_ERR_GROUP_SET_ROLES[ERR_GROUP_SET_ROLE_FAIL_SEND] = "TE04: The role packet failed to send."}
+
+var _ERR_GROUP_KICK_PEERS = make(map[int]string)
+func init(){_ERR_GROUP_KICK_PEERS[-1] = "TE-1: _ERR_GROUP_KICK_PEER"}
+const ERR_GROUP_KICK_PEER_OK = int(C.TOX_ERR_GROUP_KICK_PEER_OK) // 0
+func init(){_ERR_GROUP_KICK_PEERS[ERR_GROUP_KICK_PEER_OK] = "TE00: The function returned successfully."}
+const ERR_GROUP_KICK_PEER_GROUP_NOT_FOUND = int(C.TOX_ERR_GROUP_KICK_PEER_GROUP_NOT_FOUND) // 1
+func init(){_ERR_GROUP_KICK_PEERS[ERR_GROUP_KICK_PEER_GROUP_NOT_FOUND] = "TE01: The group number passed did not designate a valid group."}
+const ERR_GROUP_KICK_PEER_PEER_NOT_FOUND = int(C.TOX_ERR_GROUP_KICK_PEER_PEER_NOT_FOUND) // 2
+func init(){_ERR_GROUP_KICK_PEERS[ERR_GROUP_KICK_PEER_PEER_NOT_FOUND] = "TE02: The peer number passed did not designate a valid peer."}
+const ERR_GROUP_KICK_PEER_PERMISSIONS = int(C.TOX_ERR_GROUP_KICK_PEER_PERMISSIONS) // 3
+func init(){_ERR_GROUP_KICK_PEERS[ERR_GROUP_KICK_PEER_PERMISSIONS] = "TE03: The client does not have permissions to kick peers."}
+// ERR_GROUP_KICK_PEER_TOO_LONG not in current tox.h
+// const ERR_GROUP_KICK_PEER_TOO_LONG = int(C.TOX_ERR_GROUP_KICK_PEER_TOO_LONG) // 4
+// func init(){_ERR_GROUP_KICK_PEERS[ERR_GROUP_KICK_PEER_TOO_LONG] = "TE04: The reason message exceeded the maximum allowed length."}
+// ERR_GROUP_KICK_PEER_FAIL_SEND not in current tox.h
+// const ERR_GROUP_KICK_PEER_FAIL_SEND = int(C.TOX_ERR_GROUP_KICK_PEER_FAIL_SEND) // 5
+// func init(){_ERR_GROUP_KICK_PEERS[ERR_GROUP_KICK_PEER_FAIL_SEND] = "TE05: The kick packet failed to send."}
